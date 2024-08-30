@@ -44,6 +44,14 @@ To save query and response to db, MongoDB will need to be setup locally and use 
 - `mongo_client.py` Setup MongoDB client
 - `main.py` main file for the project
 
+## Thought Process
+
+- The three steps of generating transcript, summarizing transcript, and answering query from transcript are separated into their own files
+- For the purpose of this project, the main file makes sequential calls to each step
+- The transcripts are just stored locally and the next call will read from the local file
+- I wanted to keep this simple as I was building it out, so I started with connecting to OpenAI client in every step, but later created OpenAIClient to do any API call to OpenAI
+- Prompts should be stored as constants, but they can also be stored in DB
+
 ## Possible Enhancements
 
 ### Use assistants API
