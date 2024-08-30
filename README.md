@@ -30,6 +30,8 @@ To run unit test for summarize_transcript:
 python -m unittest tests/test_summarize_transcript.py
 ```
 
+To save query and response to db, MongoDB will need to be setup locally and use `MongoClient`
+
 ## Project Structure
 
 - `constants.py` stores constants like OpenAI models, prompts, and default file path
@@ -39,6 +41,7 @@ python -m unittest tests/test_summarize_transcript.py
 - `summarize_transcript.py` summarizes the sales call into key bullet points
 - `answer_query_from_transcript.py` takes a user query and transcript, answers the query based on the transcript
 - `tests/test_summarize_transcript.py` unit test for summarize_transcript
+- `mongo_client.py` Setup MongoDB client
 - `main.py` main file for the project
 
 ## Possible Enhancements

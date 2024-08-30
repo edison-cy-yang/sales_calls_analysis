@@ -4,7 +4,7 @@ from constants import PromptConstants
 
 
 def answer_query_from_transcript(
-    client: OpenAIClient, file_path: str, query: str, language="en"
+    client: OpenAIClient, file_path: str, query: str, language="en", db=None
 ):
     transcript = read_from_file(file_path)
 
@@ -25,3 +25,6 @@ def answer_query_from_transcript(
     if response:
         answer = response.choices[0].message.content
         print(f"\nResponse of the query '{query}':\n{answer}")
+        # Only store query and response to db if it exists
+        if db:
+            db.store_query_response(query, answer)

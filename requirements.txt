@@ -1,1 +1,2 @@
 openai==1.43.0
+pymongo==4.8.0
