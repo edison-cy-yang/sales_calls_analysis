@@ -24,6 +24,12 @@ To make the AI answer queries in other languages, add the language parameter for
 anwer_query_from_transcript(client, file_path, UserQueries.USER_QUERY_PRICE, "french")
 ```
 
+To run unit test for summarize_transcript:
+
+```
+python -m unittest tests/test_summarize_transcript.py
+```
+
 ## Project Structure
 
 - `constants.py` stores constants like OpenAI models, prompts, and default file path
@@ -32,6 +38,7 @@ anwer_query_from_transcript(client, file_path, UserQueries.USER_QUERY_PRICE, "fr
 - `transcript_generator.py` generates sales call transcript and save it as a text file
 - `summarize_transcript.py` summarizes the sales call into key bullet points
 - `answer_query_from_transcript.py` takes a user query and transcript, answers the query based on the transcript
+- `tests/test_summarize_transcript.py` unit test for summarize_transcript
 - `main.py` main file for the project
 
 ## Possible Enhancements
