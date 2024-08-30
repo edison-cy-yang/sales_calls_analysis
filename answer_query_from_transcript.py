@@ -1,19 +1,14 @@
-from openai import OpenAI
-import os
 from utils import read_from_file
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
+from openai_client import OpenAIClient
 
 ANSWER_QUERY_SYSTEM_PROMPT = "You are a helpful assistant who answers queries about a sales call based on call transcripts."
 
 
-def anwer_query_from_transcript(file_path, query):
+def anwer_query_from_transcript(client: OpenAIClient, file_path: str, query: str):
     transcript = read_from_file(file_path)
 
     user_prompt = f"This is the transcript of a sales call: \n {transcript}\n\nBased on the above sales transcript, answer the question {query}"
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
+    response = client.call_completions_api(
         messages=[
             {
                 "role": "system",
@@ -23,4 +18,4 @@ def anwer_query_from_transcript(file_path, query):
         ],
     )
     answer = response.choices[0].message.content
-    print(answer)
+    print(f"Response of the query '{query}':\n{answer}")

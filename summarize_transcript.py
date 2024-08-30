@@ -1,9 +1,5 @@
-from openai import OpenAI
-import os
 from utils import read_from_file
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
+from openai_client import OpenAIClient
 
 SUMMARIZE_TRANSCRIPT_PROMPT = (
     "Summarize the following sales call transcript into key bullet points"
@@ -14,10 +10,9 @@ SUMMARIZE_TRANSCRIPT_SYSTEM_PROMPT = (
 )
 
 
-def summarize_transcript(file_path):
+def summarize_transcript(client: OpenAIClient, file_path: str):
     transcript = read_from_file(file_path)
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
+    response = client.call_completions_api(
         messages=[
             {
                 "role": "system",
@@ -27,4 +22,4 @@ def summarize_transcript(file_path):
         ],
     )
     summary = response.choices[0].message.content
-    print(summary)
+    print(f"Summary of the sales call at {file_path}:\n\n{summary}")

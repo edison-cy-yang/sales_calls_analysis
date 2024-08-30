@@ -25,4 +25,4 @@ def save_content_to_file(file_path, content):
         print("Unexpected error occured {e}")
         return None
 
-    return content
+    return file_path

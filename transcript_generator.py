@@ -1,9 +1,5 @@
-from openai import OpenAI
-import os
 from utils import save_content_to_file
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-client = OpenAI(api_key=OPENAI_API_KEY)
+from openai_client import OpenAIClient
 
 TRANSCRIPT_GENERATION_PROMPT = (
     "Generate a realistic sales call transcript between two people."
@@ -24,9 +20,8 @@ TRANSCRIPT_GENERATION_SYSTEM_PROMPT = (
 DEFAULT_FILE_PATH = "sales_call_transcripts.txt"
 
 
-def generate_transcript():
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
+def generate_transcript(client: OpenAIClient):
+    response = client.call_completions_api(
         messages=[
             {
                 "role": "system",
