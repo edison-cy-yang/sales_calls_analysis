@@ -1,5 +1,6 @@
 from openai import OpenAI
 import os
+from utils import save_content_to_file
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -23,21 +24,6 @@ TRANSCRIPT_GENERATION_SYSTEM_PROMPT = (
 DEFAULT_FILE_PATH = "sales_call_transcripts.txt"
 
 
-def save_transcript_to_file(transcript: str):
-    try:
-        with open(DEFAULT_FILE_PATH, "w") as file:
-            file.write(transcript)
-    except IOError as e:
-        print(f"Error occured while writing to the file {e}")
-        return None
-    except Exception as e:
-        print("Unexpected error occured {e}")
-        return None
-    print(f"Transcript saved to {DEFAULT_FILE_PATH}")
-
-    return DEFAULT_FILE_PATH
-
-
 def generate_transcript():
     response = client.chat.completions.create(
         model="gpt-4o-mini",
@@ -50,5 +36,5 @@ def generate_transcript():
         ],
     )
     transcript = response.choices[0].message.content
-    file_path = save_transcript_to_file(transcript)
+    file_path = save_content_to_file(DEFAULT_FILE_PATH, transcript)
     return file_path
