@@ -36,6 +36,8 @@ anwer_query_from_transcript(client, file_path, UserQueries.USER_QUERY_PRICE, "fr
 
 ## Possible Enhancements
 
+### Use assistants API
+
 This project is using chat completions API with transcript input on each call. Assistants API can be used as follows:
 
 - Create an assistant specific for dealing with sales call transcript
@@ -45,3 +47,7 @@ This project is using chat completions API with transcript input on each call. A
 - Create a thread about a specific sales call transcript, ask user query
 
 Doing so, the assistant can have a library of sales call transcripts. We can keep on adding new transcripts, and allow users to ask about a specific call
+
+### Multi-language
+
+- Add the ability for the completions api to just do every call in other languages with a language setting class variable in OpenAIClient
