@@ -29,4 +29,9 @@ class PromptConstants:
     ANSWER_QUERY_PROMPT_TEMPLATE = "This is the transcript of a sales call: \n {transcript}\n\nBased on the above sales transcript, answer the question {query}"
 
 
+class UserQueries:
+    USER_QUERY_PRODUCT_INTERESTED_IN = "what product is the customer interested in?"
+    USER_QUERY_PRICE = "what is the price of the product?"
+
+
 DEFAULT_FILE_PATH = "sales_call_transcripts.txt"
