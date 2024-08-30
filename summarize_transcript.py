@@ -17,5 +17,6 @@ def summarize_transcript(client: OpenAIClient, file_path: str):
             },
         ],
     )
-    summary = response.choices[0].message.content
-    print(f"\nSummary of the sales call at {file_path}:\n\n{summary}")
+    if response:
+        summary = response.choices[0].message.content
+        print(f"\nSummary of the sales call at {file_path}:\n\n{summary}")

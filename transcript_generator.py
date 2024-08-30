@@ -13,6 +13,7 @@ def generate_transcript(client: OpenAIClient):
             {"role": "user", "content": PromptConstants.TRANSCRIPT_GENERATION_PROMPT},
         ],
     )
-    transcript = response.choices[0].message.content
-    file_path = save_content_to_file(DEFAULT_FILE_PATH, transcript)
+    if response:
+        transcript = response.choices[0].message.content
+        file_path = save_content_to_file(DEFAULT_FILE_PATH, transcript)
     return file_path

@@ -19,8 +19,11 @@ class OpenAIClient:
         model=OpenAIConstants.GPT_MODEL_4,
         temperature=OpenAIConstants.GPT_DEFAULT_TEMPERATURE,
     ):
-        response = self.client.chat.completions.create(
-            model=model, messages=messages, temperature=temperature
-        )
+        try:
+            response = self.client.chat.completions.create(
+                model=model, messages=messages, temperature=temperature
+            )
+        except Exception as e:
+            print(f"Something went wrong making OpenAI completions call: {e}")
 
         return response

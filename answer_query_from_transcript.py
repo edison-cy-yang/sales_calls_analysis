@@ -19,5 +19,6 @@ def anwer_query_from_transcript(client: OpenAIClient, file_path: str, query: str
             {"role": "user", "content": user_query_prompt},
         ],
     )
-    answer = response.choices[0].message.content
-    print(f"\nResponse of the query '{query}':\n{answer}")
+    if response:
+        answer = response.choices[0].message.content
+        print(f"\nResponse of the query '{query}':\n{answer}")
