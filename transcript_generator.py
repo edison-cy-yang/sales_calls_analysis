@@ -4,8 +4,9 @@ import os
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 client = OpenAI(api_key=OPENAI_API_KEY)
 
-SCRIPT_GENERATION_PROMPT = (
+TRANSCRIPT_GENERATION_PROMPT = (
     "Generate a realistic sales call transcript between two people."
+    "The call should center around a product, and its pricing."
     "Please include timestamps and identify the speakers. Format the transcript like the example below:\n\n"
     """
 		00:00:00 Sam (openai.com): Hey there Staya.
@@ -13,6 +14,10 @@ SCRIPT_GENERATION_PROMPT = (
 		00:00:05 Sam (openai.com): I'm doing good. Do you think you can give us 10000 more GPUs?
 		00:00:06 Satya (microsoft.com): I'm sorry Sam we can't do 10000, how about 5000?
 	"""
+)
+
+TRANSCRIPT_GENERATION_SYSTEM_PROMPT = (
+    "You are a helpful assistant who can create conversation transcripts."
 )
 
 DEFAULT_FILE_PATH = "sales_call_transcripts.txt"
@@ -39,9 +44,9 @@ def generate_transcript():
         messages=[
             {
                 "role": "system",
-                "content": "You are a helpful assistant who can create conversation transcripts.",
+                "content": TRANSCRIPT_GENERATION_SYSTEM_PROMPT,
             },
-            {"role": "user", "content": SCRIPT_GENERATION_PROMPT},
+            {"role": "user", "content": TRANSCRIPT_GENERATION_PROMPT},
         ],
     )
     transcript = response.choices[0].message.content
