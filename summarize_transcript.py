@@ -1,13 +1,6 @@
 from utils import read_from_file
 from openai_client import OpenAIClient
-
-SUMMARIZE_TRANSCRIPT_PROMPT = (
-    "Summarize the following sales call transcript into key bullet points"
-)
-
-SUMMARIZE_TRANSCRIPT_SYSTEM_PROMPT = (
-    "You are a helpful assistant who summarizes transcripts into key bullet points."
-)
+from constants import PromptConstants
 
 
 def summarize_transcript(client: OpenAIClient, file_path: str):
@@ -16,10 +9,13 @@ def summarize_transcript(client: OpenAIClient, file_path: str):
         messages=[
             {
                 "role": "system",
-                "content": SUMMARIZE_TRANSCRIPT_SYSTEM_PROMPT,
+                "content": PromptConstants.SUMMARIZE_TRANSCRIPT_SYSTEM_PROMPT,
             },
-            {"role": "user", "content": f"{SUMMARIZE_TRANSCRIPT_PROMPT}\n{transcript}"},
+            {
+                "role": "user",
+                "content": f"{PromptConstants.SUMMARIZE_TRANSCRIPT_PROMPT}\n{transcript}",
+            },
         ],
     )
     summary = response.choices[0].message.content
-    print(f"Summary of the sales call at {file_path}:\n\n{summary}")
+    print(f"\nSummary of the sales call at {file_path}:\n\n{summary}")
