@@ -3,7 +3,9 @@ from openai_client import OpenAIClient
 from constants import PromptConstants
 
 
-def anwer_query_from_transcript(client: OpenAIClient, file_path: str, query: str):
+def answer_query_from_transcript(
+    client: OpenAIClient, file_path: str, query: str, language="en"
+):
     transcript = read_from_file(file_path)
 
     user_query_prompt = PromptConstants.ANSWER_QUERY_PROMPT_TEMPLATE.format(
@@ -18,6 +20,7 @@ def anwer_query_from_transcript(client: OpenAIClient, file_path: str, query: str
             },
             {"role": "user", "content": user_query_prompt},
         ],
+        language=language,
     )
     if response:
         answer = response.choices[0].message.content

@@ -27,6 +27,9 @@ class PromptConstants:
     )
     ANSWER_QUERY_SYSTEM_PROMPT = "You are a helpful assistant who answers queries about a sales call based on call transcripts."
     ANSWER_QUERY_PROMPT_TEMPLATE = "This is the transcript of a sales call: \n {transcript}\n\nBased on the above sales transcript, answer the question {query}"
+    OTHER_LANGUAGE_SYSTEM_PROMPT = (
+        "You are a multi-lingual assistant that responds in {language}"
+    )
 
 
 class UserQueries:

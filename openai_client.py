@@ -1,6 +1,6 @@
 import os
 from openai import OpenAI
-from constants import OpenAIConstants
+from constants import OpenAIConstants, PromptConstants
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
@@ -18,7 +18,18 @@ class OpenAIClient:
         messages: list,
         model=OpenAIConstants.GPT_MODEL_4,
         temperature=OpenAIConstants.GPT_DEFAULT_TEMPERATURE,
+        language="en",
     ):
+        if language != "en":
+            messages.insert(
+                0,
+                {
+                    "role": "system",
+                    "content": PromptConstants.OTHER_LANGUAGE_SYSTEM_PROMPT.format(
+                        language=language
+                    ),
+                },
+            )
         try:
             response = self.client.chat.completions.create(
                 model=model, messages=messages, temperature=temperature

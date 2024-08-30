@@ -18,6 +18,12 @@ To run the program:
 python main.py
 ```
 
+To make the AI answer queries in other languages, add the language parameter for the answer query call in `main.py` like :
+
+```
+anwer_query_from_transcript(client, file_path, UserQueries.USER_QUERY_PRICE, "french")
+```
+
 ## Project Structure
 
 - `constants.py` stores constants like OpenAI models, prompts, and default file path
